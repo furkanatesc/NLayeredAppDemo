@@ -8,7 +8,7 @@ using Northwind.Entities.Abstract;
 
 namespace Northwind.Entities.Concrete
 {
-    public class Product :IEntity
+    public class Product:IEntity
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }

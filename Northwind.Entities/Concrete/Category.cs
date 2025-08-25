@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Northwind.Entities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace Northwind.Entities.Concrete
     public class Category : IEntity
     {
         public int CategoryId { get; set; }
-        public string
+        
     } 
 }

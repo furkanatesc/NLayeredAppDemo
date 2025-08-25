@@ -3,6 +3,7 @@ using Northwind.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -30,12 +31,22 @@ namespace Northwind.DataAccess.Concrete.EntityFramework
             }
         }
 
+        public Product Get(Expression<Func<Product, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Product> GetAll()
         {
             using(NorthwindContext context = new NorthwindContext())
             {
                 return context.Products.ToList();
             }
+        }
+
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
+        {
+            throw new NotImplementedException();
         }
     }
 }
