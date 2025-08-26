@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http.Headers;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,17 +24,20 @@ namespace Northwind.DataAccess.Concrete.EntityFramework
             throw new NotImplementedException();
         }
 
-        public Product Get(int id)
-        {
-            using (NorthwindContext context = new NorthwindContext())
-            {
-                return context.Products.SingleOrDefault(p => p.ProductId == id);
-            }
-        }
+        //public Product Get(int id)
+        //{
+        //    using (NorthwindContext context = new NorthwindContext())
+        //    {
+        //        return context.Products.SingleOrDefault(p => p.ProductId == id);
+        //    }
+        //}
 
         public Product Get(Expression<Func<Product, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                return context.Products.SingleOrDefault(filter);
+            }
         }
 
         public List<Product> GetAll()

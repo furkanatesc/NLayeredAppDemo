@@ -13,7 +13,7 @@ namespace Northwind.DataAccess.Concrete.EntityFramework
 {
     public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
         where TEntity: class ,IEntity , new()
-        where TContext:DbContext
+        where TContext:DbContext , new()
     {
        
 
@@ -33,14 +33,20 @@ namespace Northwind.DataAccess.Concrete.EntityFramework
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (TContext context = new TContext())
+            {
+                return context.Set<TEntity>().SingleOrDefault(filter);
+            }
         }
 
        
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (TContext context = new TContext())
+            {
+                return filter == null ? context.Set<TEntity>().ToList() : context.Set<TEntity>().Where(filter).ToList();
+            }
         }
     }
 }
