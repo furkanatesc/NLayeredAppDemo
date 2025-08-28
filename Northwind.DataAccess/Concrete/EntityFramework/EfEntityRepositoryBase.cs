@@ -15,21 +15,22 @@ namespace Northwind.DataAccess.Concrete.EntityFramework
         where TEntity: class ,IEntity , new()
         where TContext:DbContext , new()
     {
-       
-
         public void Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            using(TContext context = new TContext())
+            {
+                var addedEntity = context.Entry(entity);
+                addedEntity.State = EntityState.Added;
+                context.SaveChanges();
+            }
         }
-
-       
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+
         }
 
-        
+
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
@@ -46,6 +47,14 @@ namespace Northwind.DataAccess.Concrete.EntityFramework
             using (TContext context = new TContext())
             {
                 return filter == null ? context.Set<TEntity>().ToList() : context.Set<TEntity>().Where(filter).ToList();
+            }
+        }
+
+        public void Update(TEntity entity)
+        {
+            using (TContext context = new TContext())
+            {
+                return context.entity.SingleOrDefault(filter);
             }
         }
     }

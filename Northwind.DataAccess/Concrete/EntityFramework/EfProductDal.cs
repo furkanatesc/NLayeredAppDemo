@@ -52,5 +52,10 @@ namespace Northwind.DataAccess.Concrete.EntityFramework
         {
             throw new NotImplementedException();
         }
+
+        public void Update(Product entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
