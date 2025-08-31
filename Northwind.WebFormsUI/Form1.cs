@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Northwind.Business.Abstract;
 using Northwind.Business.Concrete;
 using Northwind.DataAccess.Concrete.EntityFramework;
 
@@ -14,9 +15,13 @@ namespace Northwind.WebFormsUI
 {
     public partial class Form1 : Form
     {
+        private IProductService _productService;
+        private ICategoryService _categoryService;
         public Form1()
         {
             InitializeComponent();
+            _productService = new ProductManager(new EfProductDal());
+            _categoryService = new CategoryManager(new EfCategoryDal());
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -24,11 +29,25 @@ namespace Northwind.WebFormsUI
 
         }
 
+        
         private void Form1_Load(object sender, EventArgs e)
         {
-            ProductManager productManager = new ProductManager(new EfProductDal());
-            dgwProduct.DataSource = productManager.GetAll();
+            
+            LoadProducts();
+            LoadCategories();
+        }
 
+        private void LoadCategories()
+        {
+            cbxCategory.DataSource = _categoryService.GetAll();
+            cbxCategory.DisplayMember = "CategoryName";
+            cbxCategory.ValueMember = "CategoryId";
+
+        }
+
+        private void LoadProducts()
+        {
+            dgwProduct.DataSource = _productService.GetAll();
         }
     }
 }

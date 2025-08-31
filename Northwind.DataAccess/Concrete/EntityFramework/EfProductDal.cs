@@ -12,50 +12,8 @@ using System.Threading.Tasks;
 
 namespace Northwind.DataAccess.Concrete.EntityFramework
 {
-    public class EfProductDal : IProductDal
+    public class EfProductDal :EfEntityRepositoryBase<Product , NorthwindContext> ,IProductDal
     {
-        public void Add(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        //public Product Get(int id)
-        //{
-        //    using (NorthwindContext context = new NorthwindContext())
-        //    {
-        //        return context.Products.SingleOrDefault(p => p.ProductId == id);
-        //    }
-        //}
-
-        public Product Get(Expression<Func<Product, bool>> filter)
-        {
-            using (NorthwindContext context = new NorthwindContext())
-            {
-                return context.Products.SingleOrDefault(filter);
-            }
-        }
-
-        public List<Product> GetAll()
-        {
-            using(NorthwindContext context = new NorthwindContext())
-            {
-                return context.Products.ToList();
-            }
-        }
-
-        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Product entity)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

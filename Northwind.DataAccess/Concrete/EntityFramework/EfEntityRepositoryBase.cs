@@ -27,6 +27,12 @@ namespace Northwind.DataAccess.Concrete.EntityFramework
 
         public void Delete(TEntity entity)
         {
+            using (TContext context = new TContext())
+            {
+                var deletedEntity = context.Entry(entity);
+                deletedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
+            }
 
         }
 
@@ -46,7 +52,9 @@ namespace Northwind.DataAccess.Concrete.EntityFramework
         {
             using (TContext context = new TContext())
             {
-                return filter == null ? context.Set<TEntity>().ToList() : context.Set<TEntity>().Where(filter).ToList();
+                return filter == null ? 
+                    context.Set<TEntity>().ToList() : 
+                    context.Set<TEntity>().Where(filter).ToList();
             }
         }
 
@@ -54,7 +62,9 @@ namespace Northwind.DataAccess.Concrete.EntityFramework
         {
             using (TContext context = new TContext())
             {
-                return context.entity.SingleOrDefault(filter);
+                var updatedEntity = context.Entry(entity);
+                updatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
     }
