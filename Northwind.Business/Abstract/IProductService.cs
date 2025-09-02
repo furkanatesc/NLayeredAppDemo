@@ -11,5 +11,6 @@ namespace Northwind.Business.Abstract
     {
         List<Product> GetAll();
         List <Product> GetProductByCategory(int categoryId);
+        List<Product> GetProductsByProductName(string productName);
     }
 }
