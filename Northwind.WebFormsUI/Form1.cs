@@ -48,6 +48,20 @@ namespace Northwind.WebFormsUI
         private void LoadProducts()
         {
             dgwProduct.DataSource = _productService.GetAll();
+           
+        }
+
+        private void cbxCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dgwProduct.DataSource = _productService.GetProductByCategory(Convert.ToInt32(cbxCategory.SelectedValue));
+            }
+            catch 
+            {
+
+                
+            }
         }
     }
 }
