@@ -4,12 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Northwind.Business.Abstract;
 using Northwind.Business.Concrete;
 using Northwind.DataAccess.Concrete.EntityFramework;
+using Northwind.Entities.Concrete;
 
 namespace Northwind.WebFormsUI
 {
@@ -68,8 +67,31 @@ namespace Northwind.WebFormsUI
 
         private void tbxProductName_TextChanged(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(tbxProductName.Text))
-            dgwProduct.DataSource = _productService.GetProductsByProductName(tbxProductName.Text);
+            if (!String.IsNullOrEmpty(tbxProductName.Text))
+            {
+                dgwProduct.DataSource = _productService.GetProductsByProductName(tbxProductName.Text);
+            }
+            else
+            {
+                LoadProducts();
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _productService.Add(new Product
+            {
+                CategoryId=Convert.ToInt32(cbxCategoryId.SelectedValue),
+                ProductName=tbxProductName2.Text,
+                QuantityPerUnit=tbxQuantityPerUnit.Text,
+                UnitPrice=Convert.ToDecimal(tbxUnitPrice)
+
+            });
         }
     }
 }

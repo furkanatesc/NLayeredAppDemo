@@ -1,12 +1,6 @@
 ﻿using Northwind.DataAccess.Abstract;
-using Northwind.DataAccess.Concrete;
-using Northwind.DataAccess.Concrete.EntityFramework;
 using Northwind.Entities.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Northwind.Business.Abstract;
 
 namespace Northwind.Business.Concrete
@@ -18,7 +12,12 @@ namespace Northwind.Business.Concrete
         {
             _productDal = productDal;
         }
-         
+
+        public void Add(Product product)
+        {
+            _productDal.Add(product);
+        }
+
         public List<Product> GetAll()
         {
             return _productDal.GetAll();
