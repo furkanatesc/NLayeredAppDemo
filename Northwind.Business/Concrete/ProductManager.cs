@@ -5,7 +5,7 @@ using Northwind.Business.Abstract;
 
 namespace Northwind.Business.Concrete
 {
-    public class ProductManager:IProductService
+    public class ProductManager : IProductService
     {
         private IProductDal _productDal;
         public ProductManager(IProductDal productDal)
@@ -31,6 +31,11 @@ namespace Northwind.Business.Concrete
         public List<Product> GetProductsByProductName(string productName)
         {
             return _productDal.GetAll(p => p.ProductName.ToLower().Contains(productName.ToLower()));
+        }
+
+        public void Update(Product product)
+        {
+            _productDal.Update(product);
         }
     }
 }
