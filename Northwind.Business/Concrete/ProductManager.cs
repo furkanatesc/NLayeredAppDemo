@@ -2,6 +2,8 @@
 using Northwind.Entities.Concrete;
 using System.Collections.Generic;
 using Northwind.Business.Abstract;
+using System;
+using System.Data.Entity.Infrastructure;
 
 namespace Northwind.Business.Concrete
 {
@@ -16,6 +18,11 @@ namespace Northwind.Business.Concrete
         public void Add(Product product)
         {
             _productDal.Add(product);
+        }
+
+        public void Delete(Product product)
+        {
+            _productDal.Delete(product);
         }
 
         public List<Product> GetAll()
@@ -35,7 +42,14 @@ namespace Northwind.Business.Concrete
 
         public void Update(Product product)
         {
-            _productDal.Update(product);
+            try
+            {
+                _productDal.Update(product);
+            }
+            catch
+            {
+                throw new Exception("Silme Gerçekleşmedi");
+            }
         }
     }
 }
