@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Northwind.Business.Abstract;
 using System;
 using System.Data.Entity.Infrastructure;
+using Northwind.Business.ValidationRules.FluentValidation;
 
 namespace Northwind.Business.Concrete
 {
@@ -17,6 +18,9 @@ namespace Northwind.Business.Concrete
 
         public void Add(Product product)
         {
+            ProductValidator productValidator = new ProductValidator();
+            productValidator.Validate(product);
+
             _productDal.Add(product);
         }
 
