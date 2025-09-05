@@ -36,3 +36,4 @@ namespace Northwind.Business.ValidationRules.FluentValidation
         }
     }
 }
+ //todo data anatationu araştır.
