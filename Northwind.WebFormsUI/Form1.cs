@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using Northwind.Business.Abstract;
 using Northwind.Business.Concrete;
+using Northwind.Business.DependencyResolvers.Ninject;
+using Northwind.DataAccess.Abstract;
 using Northwind.DataAccess.Concrete.EntityFramework;
 using Northwind.Entities.Concrete;
 
@@ -14,8 +16,8 @@ namespace Northwind.WebFormsUI
         public Form1()
         {
             InitializeComponent();
-            _productService = new ProductManager(new EfProductDal());
-            _categoryService = new CategoryManager(new EfCategoryDal());
+            _productService = InstanceFactory.GetInstance<IProductService>();  //Depency Injection öncesi; new ProductManager(new EfProductDal());
+            _categoryService = InstanceFactory.GetInstance<ICategoryService>();   // Depency Injection öncesi; new CategoryManager(new EfCategoryDal());
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
