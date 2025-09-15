@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Northwind.Business.DependencyResolvers.Ninject
 {
-    internal class BusinessModule : NinjectModule
+    public class BusinessModule : NinjectModule
     {
         public override void Load()
         {
-            Bind<IProductService>().To<ProductManager>();
+            Bind<IProductService>().To<ProductManager>().InSingletonScope(); //Bir kere üretildiğinde bir daha üretilmesin diye InSingletonScope();  yazılır
             Bind<IProductDal>().To<EfProductDal>();
 
 
